@@ -8,7 +8,8 @@ import java.net.http.HttpResponse;
 public class GetExchange {
 
     public Exchange getConversion(float value) {
-        URI url = URI.create("https://v6.exchangerate-api.com/v6/638eb913de3f7834e697b44f/pair/USD/BRL/" + value);
+        String apiKey = System.getenv("API_KEY");
+        URI url = URI.create("https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/USD/BRL/" + value);
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
