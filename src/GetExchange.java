@@ -7,11 +7,11 @@ import java.net.http.HttpResponse;
 
 public class GetExchange {
 
-    public Exchange getConversion(float value) {
+    public Exchange getConversion(String convertIn, String convertOut, float value) {
         String apiKey = System.getenv("API_KEY");
-        URI url = URI.create("https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/USD/BRL/" + value);
+        URI url = URI.create("https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/" + convertIn + "/"+ convertOut +"/" + value);
 
-        HttpClient client = HttpClient.newHttpClient();
+        //HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(url)
                 .build();
