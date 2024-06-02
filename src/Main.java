@@ -1,4 +1,6 @@
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.time.LocalDateTime;
@@ -8,7 +10,7 @@ import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
@@ -31,7 +33,6 @@ public class Main {
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("EEEE dd/MM/yyyy HH:mm:ss", ptBr);
         String lastUpdate;
         String nextUpdate;
-
 
 
 
@@ -62,7 +63,7 @@ public class Main {
                     System.out.println("--------------------------");
                     convertMoney = getExchange.getConversion("USD", "BRL", dolarBrl);
                     System.out.println("Valor base: " + usFormat.format(dolarBrl));
-                    System.out.println(brlFormat.format(convertMoney.conversion_result()));
+                    System.out.println("Resultado da conversão:" + brlFormat.format(convertMoney.conversion_result()));
 
                     lastDate = convertMoney.time_last_update_utc();
                     nextDate = convertMoney.time_next_update_utc();
@@ -84,23 +85,70 @@ public class Main {
                     System.out.println("Digite o valor para conversão: ");
                     float brlDolar = scanner.nextFloat();
                     convertMoney = getExchange.getConversion("BRL", "USD", brlDolar);
-                    Exchange realDolar = getExchange.getConversion("BRL", "USD", brlDolar);
                     System.out.println("Valor base: " + brlFormat.format(brlDolar));
-                    System.out.println(usFormat.format(realDolar.conversion_result()));
+                    System.out.println("Resultado da conversão:" + usFormat.format(convertMoney.conversion_result()));
+
+                    lastDate = convertMoney.time_last_update_utc();
+                    nextDate = convertMoney.time_next_update_utc();
+
+                    lastDateTime = LocalDateTime.parse(lastDate, rfcFormattter);
+                    lastUpdate = lastDateTime.format(outputFormatter);
+
+                    nextDateTime = LocalDateTime.parse(nextDate, rfcFormattter);
+                    nextUpdate = nextDateTime.format(outputFormatter);
+
+
+                    System.out.println("Última atualização: " + lastUpdate);
+                    System.out.println("Próxima atualização: " + nextUpdate);
+                    System.out.println("");
+                    System.out.println("");
+
                     break;
                 case 3:
                     System.out.println("Digite o valor para conversão: ");
                     float euroBrl = scanner.nextFloat();
-                    Exchange euroReal = getExchange.getConversion("EUR", "BRL", euroBrl);
+                    convertMoney = getExchange.getConversion("EUR", "BRL", euroBrl);
                     System.out.println("Valor base: " + euroFormat.format(euroBrl));
-                    System.out.println(brlFormat.format(euroReal.conversion_result()));
+                    System.out.println("Resultado da conversão:" + brlFormat.format(convertMoney.conversion_result()));
+
+                    lastDate = convertMoney.time_last_update_utc();
+                    nextDate = convertMoney.time_next_update_utc();
+
+                    lastDateTime = LocalDateTime.parse(lastDate, rfcFormattter);
+                    lastUpdate = lastDateTime.format(outputFormatter);
+
+                    nextDateTime = LocalDateTime.parse(nextDate, rfcFormattter);
+                    nextUpdate = nextDateTime.format(outputFormatter);
+
+
+                    System.out.println("Última atualização: " + lastUpdate);
+                    System.out.println("Próxima atualização: " + nextUpdate);
+                    System.out.println("");
+                    System.out.println("");
+
                     break;
                 case 4:
                     System.out.println("Digite o valor para conversão: ");
                     float brlEuro = scanner.nextFloat();
-                    Exchange realEuro= getExchange.getConversion("BRL", "EUR", brlEuro);
+                    convertMoney = getExchange.getConversion("BRL", "EUR", brlEuro);
                     System.out.println("Valor base: " + brlFormat.format(brlEuro));
-                    System.out.println(euroFormat.format(realEuro.conversion_result()));
+                    System.out.println("Resultado da conversão:" + euroFormat.format(convertMoney.conversion_result()));
+
+                    lastDate = convertMoney.time_last_update_utc();
+                    nextDate = convertMoney.time_next_update_utc();
+
+                    lastDateTime = LocalDateTime.parse(lastDate, rfcFormattter);
+                    lastUpdate = lastDateTime.format(outputFormatter);
+
+                    nextDateTime = LocalDateTime.parse(nextDate, rfcFormattter);
+                    nextUpdate = nextDateTime.format(outputFormatter);
+
+
+                    System.out.println("Última atualização: " + lastUpdate);
+                    System.out.println("Próxima atualização: " + nextUpdate);
+                    System.out.println("");
+                    System.out.println("");
+
                     break;
                 case 5:
                     System.out.println("Saindo...");
@@ -111,18 +159,5 @@ public class Main {
             }
         }
 
-        /*
-        try {
-            Exchange newExchange = getExchange.getConversion(value);
-            System.out.println("Valor base: " + usFormat.format(value));
-            //System.out.println("Valor base: " + euroFormat.format(value));
-            System.out.println(brlFormat.format(newExchange.conversion_result()));
-            //System.out.println(newExchange);
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-            System.out.println("finalizando aplicação");
-        }
-
-         */
     }
 }
