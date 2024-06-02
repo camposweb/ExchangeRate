@@ -8,6 +8,8 @@ Este projeto foi um desafio (Challenge) proposto na capacitação ONE - Oracle N
 a Alura, no qual foi desenvolvido o programa para realizar conversão em tempo real nas moedas selecionadas pelo próprio
 programador, no caso eu =)
 
+No caso escolhi a trilha back-end(Java)
+
 Escolhi desenvolver para Real, Dólar e Euro.
 
 Criei uma variável de ambiente, pois não é recomendável utilizar chaves de acesso de forma explícita seja ele em softwares
